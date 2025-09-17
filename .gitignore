@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+# Ignore kluster.ai Verify Code rules
+.cursor/rules/kluster-code-verify.mdc

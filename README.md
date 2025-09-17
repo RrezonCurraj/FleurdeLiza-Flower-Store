@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌸 Blumenladen - Flower Shop Website
 
-## Getting Started
+A beautiful, responsive flower shop website built with Next.js 15 and Tailwind CSS v4. Features a modern design with smooth animations, responsive layout, and German localization.
 
-First, run the development server:
+## ✨ Features
+
+- **Responsive Design**: Mobile-first approach with breakpoints for all devices
+- **Modern UI**: Clean, elegant design with soft pastel colors and smooth animations
+- **Smooth Scrolling**: Seamless navigation between sections
+- **Interactive Elements**: Hover effects, scale animations, and smooth transitions
+- **SEO Optimized**: Proper meta tags, semantic HTML, and German localization
+- **Contact Form**: Functional contact form with validation
+- **Gallery**: Responsive image grid (3 columns desktop, 2 tablet, 1 mobile)
+
+## 🎨 Design System
+
+- **Primary Color**: #af875e (soft brownish-gold)
+- **Typography**: Playfair Display (serif) + Inter (sans-serif)
+- **Color Palette**: Soft pastels with cream, beige, and soft green accents
+- **Components**: Rounded corners, soft shadows, elegant typography
+
+## 🚀 Getting Started
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📱 Pages & Sections
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Home**: Hero section with call-to-action buttons
+- **Gallery**: Responsive flower image grid with hover effects
+- **Über uns**: About section with team information and statistics
+- **Kontakt**: Contact form and business information with map placeholder
 
-## Learn More
+## 🛠️ Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Framework**: Next.js 15 with App Router
+- **Styling**: Tailwind CSS v4 with custom theme
+- **Language**: TypeScript
+- **Fonts**: Google Fonts (Playfair Display, Inter)
+- **Icons**: Emoji-based icons for simplicity
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📝 Customization
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+To customize the website:
 
-## Deploy on Vercel
+1. **Colors**: Update the color variables in `app/app.css`
+2. **Content**: Modify text content in `app/page.tsx`
+3. **Images**: Replace placeholder emojis with actual flower images
+4. **Contact Info**: Update contact details in the contact section
+5. **Map**: Add actual Google Maps embed code
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🎯 Performance Features
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Optimized images with Next.js Image component
+- Smooth scroll behavior
+- CSS animations with hardware acceleration
+- Responsive images and layouts
+- SEO-friendly structure
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).

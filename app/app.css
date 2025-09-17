@@ -1,0 +1,234 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-brand-bg font-sans text-brand-text;
+  }
+
+  h1 {
+    @apply text-5xl font-serif font-bold text-brand-dark tracking-tight;
+  }
+
+  h2 {
+    @apply text-3xl font-serif text-brand;
+  }
+
+  h3 {
+    @apply text-xl font-semibold text-brand-dark;
+  }
+
+  p {
+    @apply text-base leading-relaxed text-dark-200;
+  }
+
+  button {
+    @apply px-6 py-3 rounded-lg font-semibold transition-colors;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-brand text-white hover:bg-brand-dark;
+  }
+
+  .btn-outline {
+    @apply border-2 border-brand text-brand hover:bg-brand hover:text-white;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-md p-6;
+  }
+
+  .section {
+    @apply py-16 px-6 lg:px-20;
+  }
+
+  .gradient-brand {
+    background: linear-gradient(to right, #af875e, #d4b996);
+  }
+
+  .text-gradient-brand {
+    @apply bg-clip-text text-transparent;
+    background: linear-gradient(to right, #af875e, #d4b996);
+  }
+}
+
+@layer utilities {
+  /* Custom animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  /* Enhanced hover effects */
+  .hover-lift {
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Form focus states */
+  .form-input:focus {
+    outline: none;
+    border-color: #af875e;
+    box-shadow: 0 0 0 3px rgba(175, 135, 94, 0.1);
+  }
+
+  /* Button hover effects */
+  .btn-hover-scale {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-hover-scale:hover {
+    transform: scale(1.05);
+  }
+
+  .btn-hover-scale:active {
+    transform: scale(0.98);
+  }
+
+  /* Floating flower animations */
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    25% {
+      transform: translateY(-10px) rotate(5deg);
+    }
+    50% {
+      transform: translateY(-5px) rotate(-3deg);
+    }
+    75% {
+      transform: translateY(-15px) rotate(2deg);
+    }
+  }
+
+  @keyframes floatSlow {
+    0%,
+    100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-8px) rotate(-2deg);
+    }
+  }
+
+  @keyframes floatFast {
+    0%,
+    100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    33% {
+      transform: translateY(-12px) rotate(3deg);
+    }
+    66% {
+      transform: translateY(-6px) rotate(-1deg);
+    }
+  }
+
+  .flower-float-1 {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .flower-float-2 {
+    animation: floatSlow 6s ease-in-out infinite;
+  }
+
+  .flower-float-3 {
+    animation: floatFast 3s ease-in-out infinite;
+  }
+
+  /* Floating petal animation */
+  @keyframes floatPetal {
+    0% {
+      transform: translateY(100vh) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.3;
+    }
+    90% {
+      opacity: 0.3;
+    }
+    100% {
+      transform: translateY(-100px) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  .animate-float-petal {
+    animation: floatPetal linear infinite;
+  }
+
+  /* Blur reveal animation */
+  @keyframes blurReveal {
+    0% {
+      filter: blur(20px);
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    50% {
+      filter: blur(10px);
+      opacity: 0.5;
+      transform: scale(0.9);
+    }
+    100% {
+      filter: blur(0px);
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .animate-blur-reveal {
+    animation: blurReveal 1.5s ease-out forwards;
+    filter: blur(20px);
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  /* Hide scrollbars for mobile gallery */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
