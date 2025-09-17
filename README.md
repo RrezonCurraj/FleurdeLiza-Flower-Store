@@ -1,6 +1,6 @@
 # 🌸 Blumenladen - Flower Shop Website
 
-A beautiful, responsive flower shop website built with Next.js 15 and Tailwind CSS v4. Features a modern design with smooth animations, responsive layout, and German localization.
+A beautiful, responsive flower shop website built with Next.js 15 and Tailwind CSS v4. Features a modern design with smooth animations, responsive layout, and Swiss localization.
 
 ## ✨ Features
 
