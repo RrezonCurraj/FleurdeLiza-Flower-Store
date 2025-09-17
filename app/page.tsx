@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PageTransition from "../components/PageTransition";
 
 export default function Home() {
@@ -19,6 +19,7 @@ export default function Home() {
     type: "idle",
     message: "",
   });
+  const [showScrollToTop, setShowScrollToTop] = useState(false);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -26,6 +27,21 @@ export default function Home() {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+      setShowScrollToTop(scrollTop > 300);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const openLightbox = (imageSrc: string) => {
     setSelectedImage(imageSrc);
@@ -104,7 +120,7 @@ export default function Home() {
       setTimeout(() => {
         setFormStatus({ type: "idle", message: "" });
       }, 5000);
-    } catch (error) {
+    } catch {
       setFormStatus({
         type: "error",
         message:
@@ -947,6 +963,30 @@ export default function Home() {
             </div>
           </div>
         </div>
+      )}
+
+      {/* Scroll to Top Button */}
+      {showScrollToTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-6 right-6 z-40 bg-brand hover:bg-brand-dark text-white p-3 rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 group"
+          aria-label="Nach oben scrollen"
+        >
+          <svg
+            className="w-6 h-6 transition-transform duration-300 group-hover:-translate-y-1"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 10l7-7m0 0l7 7m-7-7v18"
+            />
+          </svg>
+        </button>
       )}
     </div>
   );
