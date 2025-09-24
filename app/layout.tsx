@@ -20,6 +20,14 @@ export const metadata: Metadata = {
   keywords:
     "Blumen, Floristik, Blumenladen, Hochzeitsblumen, Geburtstagsblumen, Pflanzen, frisch",
   authors: [{ name: "Blumenladen Team" }],
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml", sizes: "any" },
+      { url: "/images/flower.svg", type: "image/svg+xml" },
+    ],
+    apple: "/favicon.svg",
+    shortcut: "/favicon.svg",
+  },
   openGraph: {
     title: "Blumenladen - Ihr lokaler Blumenladen",
     description:
@@ -36,6 +44,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de">
+      <head>
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any" />
+        <link rel="icon" href="/images/flower.svg" type="image/svg+xml" />
+        <link rel="shortcut icon" href="/favicon.svg" />
+        <link rel="apple-touch-icon" href="/favicon.svg" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

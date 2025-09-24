@@ -10,7 +10,8 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      // Only change to solid background after scrolling past the hero section
+      setIsScrolled(window.scrollY > 200);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -27,8 +28,10 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/95 backdrop-blur-md shadow-lg" : "bg-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled
+          ? "bg-white/95 backdrop-blur-md shadow-lg"
+          : "bg-transparent backdrop-blur-md"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -97,14 +100,16 @@ export default function Navbar() {
           <div className="md:hidden">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`transition-colors duration-200 ${
+              className={`transition-all duration-300 transform hover:scale-110 ${
                 isScrolled
                   ? "text-brand-dark hover:text-brand"
                   : "text-white hover:text-white/80"
               }`}
             >
               <svg
-                className="w-6 h-6"
+                className={`w-6 h-6 transition-transform duration-300 ${
+                  isMobileMenuOpen ? "rotate-90" : "rotate-0"
+                }`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -113,7 +118,11 @@ export default function Navbar() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
+                  d={
+                    isMobileMenuOpen
+                      ? "M6 18L18 6M6 6l12 12"
+                      : "M4 6h16M4 12h16M4 18h16"
+                  }
                 />
               </svg>
             </button>
@@ -121,56 +130,72 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Navigation */}
-        {isMobileMenuOpen && (
+        <div
+          className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out ${
+            isMobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          }`}
+        >
           <div
-            className={`md:hidden backdrop-blur-md shadow-lg rounded-lg mt-2 p-4 transition-all duration-300 ${
+            className={`backdrop-blur-md shadow-lg rounded-lg mt-2 p-4 transition-all duration-300 ${
               isScrolled ? "bg-white/95" : "bg-black/20"
             }`}
           >
             <div className="flex flex-col space-y-4">
               <button
                 onClick={() => scrollToSection("home")}
-                className={`transition-colors duration-200 font-medium text-left ${
+                className={`transition-all duration-300 font-medium text-left py-2 px-3 rounded-lg transform hover:scale-105 hover:bg-white/10 ${
                   isScrolled
                     ? "text-brand-dark hover:text-brand"
                     : "text-white hover:text-white/80"
                 }`}
+                style={{
+                  animationDelay: isMobileMenuOpen ? "0.1s" : "0s",
+                }}
               >
                 Home
               </button>
               <button
                 onClick={() => scrollToSection("gallery")}
-                className={`transition-colors duration-200 font-medium text-left ${
+                className={`transition-all duration-300 font-medium text-left py-2 px-3 rounded-lg transform hover:scale-105 hover:bg-white/10 ${
                   isScrolled
                     ? "text-brand-dark hover:text-brand"
                     : "text-white hover:text-white/80"
                 }`}
+                style={{
+                  animationDelay: isMobileMenuOpen ? "0.2s" : "0s",
+                }}
               >
                 Gallery
               </button>
               <button
                 onClick={() => scrollToSection("about")}
-                className={`transition-colors duration-200 font-medium text-left ${
+                className={`transition-all duration-300 font-medium text-left py-2 px-3 rounded-lg transform hover:scale-105 hover:bg-white/10 ${
                   isScrolled
                     ? "text-brand-dark hover:text-brand"
                     : "text-white hover:text-white/80"
                 }`}
+                style={{
+                  animationDelay: isMobileMenuOpen ? "0.3s" : "0s",
+                }}
               >
                 Über uns
               </button>
               <button
                 onClick={() => scrollToSection("contact")}
-                className={`transition-colors duration-200 font-medium text-left ${
+                className={`transition-all duration-300 font-medium text-left py-2 px-3 rounded-lg transform hover:scale-105 hover:bg-white/10 ${
                   isScrolled
                     ? "text-brand-dark hover:text-brand"
                     : "text-white hover:text-white/80"
                 }`}
+                style={{
+                  animationDelay: isMobileMenuOpen ? "0.4s" : "0s",
+                }}
               >
                 Kontakt
               </button>
             </div>
           </div>
-        )}
+        </div>
       </div>
     </nav>
   );

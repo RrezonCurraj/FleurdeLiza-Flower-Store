@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import PageTransition from "../components/PageTransition";
+import emailjs from "@emailjs/browser";
+import { emailConfig } from "../lib/emailConfig";
 
 export default function Home() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -103,9 +105,18 @@ export default function Home() {
     setFormStatus({ type: "loading", message: "Nachricht wird gesendet..." });
 
     try {
-      // Here you would typically send the data to your backend/API
-      // For now, we'll simulate a successful submission
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      // Send email using EmailJS
+      await emailjs.send(
+        emailConfig.serviceId,
+        emailConfig.templateId,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+          to_name: "Fleur de Liza Team",
+        },
+        emailConfig.publicKey
+      );
 
       setFormStatus({
         type: "success",
@@ -120,7 +131,8 @@ export default function Home() {
       setTimeout(() => {
         setFormStatus({ type: "idle", message: "" });
       }, 5000);
-    } catch {
+    } catch (error) {
+      console.error("Email sending failed:", error);
       setFormStatus({
         type: "error",
         message:
@@ -161,15 +173,18 @@ export default function Home() {
         id="home"
         className="relative min-h-screen flex items-center justify-center overflow-hidden"
       >
-        {/* Background Image */}
+        {/* Background Video */}
         <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/hero.jpg"
-            alt="Beautiful flower arrangement background"
-            fill
-            className="object-cover"
-            priority
-          />
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover object-[20%_center] sm:object-center"
+          >
+            <source src="/images/flowervid.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
           <div className="absolute inset-0 bg-black/50"></div>
         </div>
 
@@ -789,9 +804,9 @@ export default function Home() {
                         Adresse
                       </div>
                       <div className="text-dark-200">
-                        Musterstraße 123
+                        Bahnhofplatz 4
                         <br />
-                        12345 Musterstadt
+                        2502 Biel/Bienne
                       </div>
                     </div>
                   </div>
@@ -814,7 +829,7 @@ export default function Home() {
                       <div className="font-semibold text-brand-dark">
                         E-Mail
                       </div>
-                      <div className="text-dark-200">info@blumenladen.de</div>
+                      <div className="text-dark-200">info@fleurdeliza.ch</div>
                     </div>
                   </div>
                   <div className="flex items-center space-x-4">
@@ -837,13 +852,45 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Map Placeholder */}
+              {/* Embedded Google Map */}
               <div className="card p-0 overflow-hidden">
-                <div className="aspect-video bg-gradient-to-br from-brand-light/30 to-brand/50 flex items-center justify-center">
-                  <div className="text-center">
-                    <span className="text-4xl mb-2 block">🗺️</span>
-                    <p className="text-brand-dark font-semibold">Google Maps</p>
-                    <p className="text-sm text-dark-200">Interaktive Karte</p>
+                <div className="aspect-video relative">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!4v1758743729952!6m8!1m7!1sCAoSF0NJSE0wb2dLRUlDQWdJQ18yZkdhaVFF!2m2!1d47.13327903066576!2d7.24186638655388!3f175.51!4f6.890000000000001!5f0.4000000000000002"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen={true}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Fleur de Liza Location - Bahnhofplatz 4, Biel/Bienne"
+                    className="rounded-lg"
+                  />
+
+                  {/* Google Maps Button Overlay */}
+                  <div className="absolute top-4 right-4">
+                    <a
+                      href="https://maps.google.com/maps?q=Bahnhofplatz+4,+2502+Biel/Bienne,+Switzerland"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-white hover:bg-gray-50 text-gray-800 px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center space-x-2 text-sm font-medium"
+                    >
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                        />
+                      </svg>
+                      <span>In Google Maps öffnen</span>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -910,10 +957,10 @@ export default function Home() {
             <div>
               <h4 className="text-lg font-semibold mb-4 text-white">Kontakt</h4>
               <div className="space-y-2">
-                <p className="text-white">Musterstraße 123</p>
-                <p className="text-white">12345 Musterstadt</p>
-                <p className="text-white">+49 (0) 123 456 789</p>
-                <p className="text-white">info@blumenladen.de</p>
+                <p className="text-white">Bahnhofplatz 4, 2502 Biel/Bienne</p>
+
+                <p className="text-white">+49 --- ---</p>
+                <p className="text-white">info@fleurdeliza.ch</p>
               </div>
             </div>
           </div>
