@@ -4,8 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import PageTransition from "../components/PageTransition";
-import emailjs from "@emailjs/browser";
-import { emailConfig } from "../lib/emailConfig";
+// Removed direct EmailJS import - now using API route
 
 export default function Home() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -105,18 +104,19 @@ export default function Home() {
     setFormStatus({ type: "loading", message: "Nachricht wird gesendet..." });
 
     try {
-      // Send email using EmailJS
-      await emailjs.send(
-        emailConfig.serviceId,
-        emailConfig.templateId,
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          message: formData.message,
-          to_name: "Fleur de Liza Team",
+      // Send email using secure API route
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        emailConfig.publicKey
-      );
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to send email");
+      }
 
       setFormStatus({
         type: "success",
@@ -180,6 +180,7 @@ export default function Home() {
             muted
             loop
             playsInline
+            preload="metadata"
             className="w-full h-full object-cover object-[20%_center] sm:object-center"
           >
             <source src="/images/flowervid.mp4" type="video/mp4" />
@@ -364,6 +365,8 @@ export default function Home() {
                       fill
                       className="object-cover transition-transform duration-300 group-hover:scale-110"
                       sizes="280px"
+                      loading="lazy"
+                      quality={75}
                     />
                   </div>
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
@@ -440,6 +443,8 @@ export default function Home() {
                     fill
                     className="object-cover transition-transform duration-300 group-hover:scale-110"
                     sizes="(max-width: 1200px) 50vw, 33vw"
+                    loading="lazy"
+                    quality={75}
                   />
                 </div>
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
@@ -598,6 +603,7 @@ export default function Home() {
                   width={300}
                   height={300}
                   className="object-contain opacity-80"
+                  priority
                 />
               </div>
             </div>
