@@ -314,10 +314,6 @@ export default function Home() {
             >
               {[
                 {
-                  src: "/images/flw1.jpg",
-                  alt: "Beautiful flower arrangement 1",
-                },
-                {
                   src: "/images/flw2.png",
                   alt: "Beautiful flower arrangement 2",
                 },
@@ -389,10 +385,6 @@ export default function Home() {
           {/* Desktop: Grid Gallery */}
           <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              {
-                src: "/images/flw1.jpg",
-                alt: "Beautiful flower arrangement 1",
-              },
               {
                 src: "/images/flw2.png",
                 alt: "Beautiful flower arrangement 2",

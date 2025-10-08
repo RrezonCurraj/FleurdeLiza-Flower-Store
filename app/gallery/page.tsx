@@ -34,10 +34,6 @@ export default function Gallery() {
 
   const galleryImages = [
     {
-      src: "/images/flw1.jpg",
-      alt: "Beautiful flower arrangement 1",
-    },
-    {
       src: "/images/flw2.png",
       alt: "Beautiful flower arrangement 2",
     },
